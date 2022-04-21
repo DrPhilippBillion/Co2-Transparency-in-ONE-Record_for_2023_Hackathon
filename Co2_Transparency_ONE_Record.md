@@ -58,11 +58,7 @@ One or more stakeholders are able to provide CO2 transparency on their segments 
 
 The ONE Record data model follows two principles: Piece-centricity and physics-orientation. Piece-centricity is self-explanatory, as every information is linked with the piece as the lowest available transportation object. Physics-orientation means that the linking strucutre of ONE Record follows the structures of the physical world (for more details, please refer to [ONE Record Github Repository](https://github.com/IATA-Cargo/ONE-Record).
 
-The problem here is that the two principles are "collading" by some aspects here: The CO2-Emissions happen to the 
-
->TransportMeans
-
-as it is trucks, planes, etc. to burn fuel. On the other hand, it would not help a data consumer to know that the aircraft with it´s piece onboard burnt a specific ammount of fuel without a brakedown to it´s piece. To close this gap, a set of data objects and process descriptions is described here to enable end-to-end, multi-modal CO2 tracking throughout the supply chain.
+The problem here is that the two principles are "collading" by some aspects here: The CO2-Emissions happen to the ***TransportMeans*** as trucks and planes burn fuel, not pieces or shipments. On the other hand, it would not help a data consumer to know that the aircraft with it´s piece onboard burnt a specific ammount of fuel without a brakedown to it´s piece. To close this gap, a set of data objects and process descriptions is described here to enable end-to-end, multi-modal CO2 tracking throughout the supply chain.
 
 The vision of this approach is to give even to consumers a transparency on CO2 emissions potentially from the production site to his door, covering all movement of the piece.
 
