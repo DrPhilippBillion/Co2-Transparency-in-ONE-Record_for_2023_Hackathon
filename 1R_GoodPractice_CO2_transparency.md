@@ -39,7 +39,7 @@ Publication date, version and history should be provided by the Github version c
 
 ## Dependencies
 
-### Standards used:
+### Standards applied
 
 The ONE Record business ontology version as of APR 13, 2022 was used [Working draft Ontology of 2022APR13](https://github.com/IATA-Cargo/ONE-Record/blob/bbe86e364b04d6a6279f0ab6e9ee47e1905ec9c4/working_draft/ontology/IATA-1R-DM-Ontology.ttl).
 
