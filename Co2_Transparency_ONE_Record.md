@@ -5,10 +5,10 @@
 ### Objective 
 The purpose of this document is to provide a Good Practice for end2end and multi-modal CO2 emission transparency in the IATA ONE Record-based data eco-system.
 
-## Target audience
+### Target audience
 This document can be used by any party with the interest of using digital accompanying documents in ONE Record. 
 
-## Geographical coverage
+### Geographical coverage
 As there are no legal or operational restrictions, the solution can be used world wide.
 
 ### Creators
@@ -19,17 +19,17 @@ SOUVEREIGN
 Fraunhofer IML, Oliver Ditz
 Lufthansa Industry Solutions, Daniel Döppner
 
-## Continous development and availability
+### Continous development and availability
 
 This document is to be used and continously developed, even if the current major stakeholders should move to other topics. Thus a "handover" in Github is planned if responsibilities should shift.
 
-## Use and reference
+### Use and reference
 
 This Good Practice is free to access and use. 
 
 Please mention the use of this Good practice and provide a link to the Github repository as a source.
 
-## Publication date, version and history
+### Publication date, version and history
 
 Publication date, version and history should be provided by the Github version control system and not be duplicated here.
 
@@ -42,7 +42,11 @@ The ONE Record business ontology version as of APR 13, 2022 was used [Working dr
 
 The ONE Record API and security specification draft witout a version as of APR 13, 2022 was used (no link available yet).
 
+### ONE Record Server Implementation used
+
 (no ONE Record server implementation yet)
+
+### Other Software products used
 
 ## Assumptions
 
@@ -117,7 +121,3 @@ The ***typicalCO2Coefficient*** describes ???
 ## Results / Summary
 
 ## Additional comments
-
-### Provision of BLOBs on the data provider side
-
-### Procession of BLOBs on the data user side 
