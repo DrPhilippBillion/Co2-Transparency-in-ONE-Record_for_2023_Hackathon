@@ -15,8 +15,11 @@ As there are no legal or operational restrictions, the solution can be used worl
 This document is the outcome of a ONE Record pilot project with the "Digitales Testfeld Air Cargo" by the German air cargo community. Parties/Persons involved were:
 
 Lufthansa Cargo, Philipp Billion (in lead)
+
 SOUVEREIGN
+
 Fraunhofer IML, Oliver Ditz
+
 Lufthansa Industry Solutions, Daniel Döppner
 
 ### Continous development and availability
