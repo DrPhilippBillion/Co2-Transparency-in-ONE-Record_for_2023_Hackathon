@@ -1,6 +1,6 @@
 # Providing CO2 Transparency in ONE Record
 
-## Basic Information
+## Basic Information on this document
 
 ### Objective 
 The purpose of this document is to provide a Good Practice for end2end and multi-modal CO2 emission transparency in the IATA ONE Record-based data eco-system.
