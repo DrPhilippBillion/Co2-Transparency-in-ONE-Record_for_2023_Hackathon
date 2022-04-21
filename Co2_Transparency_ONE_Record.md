@@ -70,81 +70,43 @@ In the legacy messaging environment, end to end CO2 emission tracking on piece l
 
 # Target process
 
-## Data fields
+## Physical CO2 emission sources
 
-### Physical CO2 emission sources
+CO2 is emitted by a ***transportMeans*** on a ***transportMovement***, because a ***transportMeans*** does not produce emissions by itself (a plane that isn´t flying), the primary attribution of CO2-Emissions is linked with the ***transportMovement***. The ***transportMovement*** can be any movement of pieces, like a Truck leg, a flight, or even a forklift-movement.
 
-CO2 is emitted by 
+### transportMovement LO
 
->TransportMeans
+The TransportMovement directly contains emission-relevant data: The ***distanceMeasured***, the ***distanceCalculated***, the ***fuelType***, the ***fuelAmountMeasured***, the ***fuelAmountCalculated*** and a link towards the correlating CO2-Emissions ***CO2Emissions*** (1:n link).
 
-on
+#### distanceMeasured and distanceCalculated
 
->TransportMovement
+If available, the actually measured distance is provided in the ***distanceMeasured*** data field. Only if not available, the ***distanceCalculated*** data field should be populated.
 
-because a TransporMeans does not produce emissions by itself (a plane that isn´t flying), the primary attribution of CO2-Emissions is linked with the TransportMovement. The TransportMovement can be any movement of pieces, like a Truck leg, a flight, or even a forklift-movement.
+#### fuelType
 
-#### TransportMovement LO
+The ***fuelType*** data field should indicate the fuel that was consumed for this ***transportMovement***. "Kerosene", "SAF", "Renewable electric energy" are examples for possible values ***CHECK ON LIST HERE***.
 
-The TransportMovement directly contains emission-relevant data: The
+#### fuelAmountMeasured and fuelAmountCalculated
 
-> distanceMeasure
+If available, the actually measured fuel consumption is provided in the ***fuelAmountMeasured*** data field. Only if not available, the ***fuelAmountCalculated*** data field should be populated.
 
-, the
+#### Other data fields
 
-> distanceCalculated
+Other data fields like ***departureLocation*** and ***arrivalLocation*** could be used to verify the CO2-Emission relevant data sources. Additionally, relevant information could be added as an ***externalReference***, if only available as PDF. This could also be used for an image or a GPS-track of the geo-locational movement to provide an additional layer of information.
 
-, the
+The ***movementType*** has a special relevance here, as it indicates wether this is a planned transport movement or an acually performed one.
 
-> fuelType
+### transportMeans LO
 
-, the 
+The ***transportMeans*** describes the means of transportation used to perfom for the linked transportMovement. Classical examples are a truck that performs a road leg for a transportation from the forwarder´s hub to the carrier´s origin airport, or a Boeing 777 freighter to perform a flight from Frankfurt to Rio de Janeiro. 
 
-> fuelAmountMeasured
+#### typicalFuelConsumption
 
-, the 
+The ***typicalFuelConsumption*** describes an average amount of fuel for a defined distance, e.g. 12 l / 100 km. This does not include the type of fuel, as one of the assumptions is that the consumption doesn´t depend on the type of fuel. When using this, the ***unit*** data field is quite extensively used, with a content like "l/100km".
 
-> fuelAmountCalculated
+#### typicalCO2Coefficient
 
-and a link towards the correlating CO2-Emissions
-
-> CO2Emissions (1:n link)
-
-##### distanceMeasured and distanceCalculated
-
-If available, the actually measured distance is provided in the distanceMeasured data field. Only if not available, the distanceCalculated data field should be populated.
-
-##### fuelType
-
-The fuelType data field should indicate the fuel that was consumed for this transportMovement. "Kerosene", "SAF", "Renewable electric energy" are examples for possible values ***CHECK ON LIST HERE***.
-
-##### fuelAmountMeasured and fuelAmountCalculated
-
-If available, the actually measured fuel consumption is provided in the fuelAmountMeasured data field. Only if not available, the fuelAmountCalculated data field should be populated.
-
-##### Other data fields
-
-Other data fields like 
-
-> departureLocation
-
-and 
-
-> arrivalLocation
-
-could be used to verify the CO2-Emission relevant data sources. Additionally, relevant information could be added as an
-
-> externalReference
-
-, if only available as PDF. This could also be used for an image or a GPS-track of the geo-locational movement to provide an additional layer of information.
-
-The 
-
-> movementType 
-
-has a special relevance here, as it indicates wether this is a planned transport movement or an acually performed one.
-
-### Specifically used data fields
+The ***typicalCO2Coefficient*** describes ???
 
 ## API use
 
