@@ -55,6 +55,8 @@ The ONE Record API and security specification draft witout a version as of APR 1
 
 One or more stakeholders are able to provide CO2 transparency on their segments of the transport, other stakeholders are interested and capable of consuming this data.
 
+A central assumption is that there is an interest of stakeholders to recieve CO2 transparency on piece level, end2end, multi-modal.
+
 ## Process
 
 ### Solution approach
