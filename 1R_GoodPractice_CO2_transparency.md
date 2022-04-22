@@ -122,3 +122,17 @@ The ***typicalCO2Coefficient*** describes ???
 ## Results / Summary
 
 ## Additional comments
+
+Calculation on piece level: indicator, if calculation was perfomed on piece-level or not
+
+Ebene: typicalCO2Coefficient
+Type: 
+  calculation approach
+    Rundlauf: 
+    Intensitätswert
+
+CO2Coefficient / CO2E IntensityFactor
+
+Nicht CO2, aber climate relevant
+TTW
+- if meeasured timeframe: 
