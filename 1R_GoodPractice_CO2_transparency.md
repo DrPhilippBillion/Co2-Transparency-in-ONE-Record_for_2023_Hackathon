@@ -57,9 +57,7 @@ One or more stakeholders are able to provide CO2 transparency on their segments 
 
 A central assumption is that there is an interest of stakeholders to recieve CO2 transparency on piece level, end2end, multi-modal.
 
-## Process
-
-### Solution approach
+## Solution approach
 
 The ONE Record data model follows two principles: Piece-centricity and physics-orientation. Piece-centricity is self-explanatory, as every information is linked with the piece as the lowest available transportation object. Physics-orientation means that the linking strucutre of ONE Record follows the structures of the physical world (for more details, please refer to [ONE Record Github Repository](https://github.com/IATA-Cargo/ONE-Record).
 
@@ -69,51 +67,106 @@ The vision of this approach is to give even to consumers a transparency on CO2 e
 
 Principally, the approach does not define a CO2-Emission calculation methode, but supports any methode, and even the option of providing results for different calculation methods. It also enables transparency on the calculation parameters (fuel burnt, distances, etc.), their acquisition methode (measured, calculated), so a data consumer could potentially apply his own calculation method.
 
-### Solution in current environment
+## Solution in current environment
 
 In the legacy messaging environment, end to end CO2 emission tracking on piece level isn´t possible. Generic solutions for transparency on shipment level are in place, but don´t follow a standardized approach for different modes of transportation.
 
-# Target process
+# Data use and target process
 
-## Physical CO2 emission sources
+Climate relevant emissions are performed by a ***transportMeans*** on a ***transportMovement***, because a ***transportMeans*** does not produce emissions by itself (e.g. a plane that isn´t flying), the primary attribution of CO2-Emissions is linked with the ***transportMovement***. The ***transportMovement*** can be any movement of pieces, like a Truck leg, a flight, or even a forklift-movement. 
 
-CO2 is emitted by a ***transportMeans*** on a ***transportMovement***, because a ***transportMeans*** does not produce emissions by itself (a plane that isn´t flying), the primary attribution of CO2-Emissions is linked with the ***transportMovement***. The ***transportMovement*** can be any movement of pieces, like a Truck leg, a flight, or even a forklift-movement.
+While all climate data exchange around ***transportMeans*** and ***transportMovement*** serves for submitting the data basis for climate impact calculation between different stakeholders of the supply chain, the following climate impact data on piece level serves to fulfill the estimation of the actual impact of the transport on the climate.
 
-### transportMovement LO
+
+
+|   	|Physical object with climate impacting emissions|Climate impacting attributions on piece level|
+|---	|---	|---	|
+|Focus LOs  	|***transportMeans***, ***TransportMovement***, ***payloadDistance***|***piece***, ***climateEffect***|
+|Example|RFS Truck from AMS to CDG caused 12t  
+|Purpose|Provide basic data for climate impact calculation on piece level|Provide transparency on climate impact of transport on piece level|
+|Provider of data	|Operators (Airline, Trucking Company, etc.)|"Supply chain orchestrators" (can be airlines, forwarders, booking platforms)|
+|Target Group / Data consumers |"Supply chain orchestrators" (can be airlines, forwarders, booking platforms)|Shippers, end customers, etc.|
+
+## transportMovement LO
 
 The TransportMovement directly contains emission-relevant data: The ***distanceMeasured***, the ***distanceCalculated***, the ***fuelType***, the ***fuelAmountMeasured***, the ***fuelAmountCalculated*** and a link towards the correlating CO2-Emissions ***CO2Emissions*** (1:n link).
 
-#### distanceMeasured and distanceCalculated
+### Data fields: distanceMeasured and distanceCalculated
 
 If available, the actually measured distance is provided in the ***distanceMeasured*** data field. Only if not available, the ***distanceCalculated*** data field should be populated.
 
-#### fuelType
+### Data field: fuelType
 
 The ***fuelType*** data field should indicate the fuel that was consumed for this ***transportMovement***. "Kerosene", "SAF", "Renewable electric energy" are examples for possible values ***CHECK ON LIST HERE***.
 
-#### fuelAmountMeasured and fuelAmountCalculated
+### Data fields: fuelAmountMeasured and fuelAmountCalculated
 
 If available, the actually measured fuel consumption is provided in the ***fuelAmountMeasured*** data field. Only if not available, the ***fuelAmountCalculated*** data field should be populated.
 
-#### Other data fields
+### Data field: totalLoadedWeight
+
+TBD: the total transportation weight is required for climate relevant emission monitoring. Question: How do we deal with this? 
+
+Option 1: Assume shipments are not split, so it is the sum of all totalGrossWeighs of the Shipments. Pro: Realistic and exact, con: doesn´t work if shipments are split
+
+Option 2: Sum the pieces on truck. Pro: easy to calculate; con: is not correct (total gross weight is usually higher with additional loading equipment), Piece info often missing
+
+Option 3: create a new measured value totalLoadedWeight; most accurate, but also available?
+
+## payloadDistance LO
+
+### Data field: payloadDistanceResult (value)
+
+The payloadDistanceResult is a most relevant parameter for the estimation of the climate impact of this transportMovement. It is usually calculated by multiplying the weight and the distance of the transportMovement. Possible units are kilogram-kilometre ("kgkm"), tonne-kilometre ("tkm"), kilometre-tonne ("kmt") and "ton-mile", which is in the US: 1 ton-mile * ( 0.907185 t / short ton) * ( 1.609344 km / mile ) = 1.460 tkm.
+
+### ISOTransparencyLevel (int)
+
+This parameter shows the level of parameters to be included. 
+
+TBD here, e.g. is there a level including the deadhead legs? Etc.
+
+### FuelConsumptionParameter
+
+This indicator can be either "measured" or "calculated" (TBD: Obsolete due to the ISO Levels bringing clear indicators here?)
+
+### DistanceParameter
+
+This indicator can be either "measured" or "calculated" (TBD: Obsolete due to the ISO Levels bringing clear indicators here?)
+
+
+### Other data fields
 
 Other data fields like ***departureLocation*** and ***arrivalLocation*** could be used to verify the CO2-Emission relevant data sources. Additionally, relevant information could be added as an ***externalReference***, if only available as PDF. This could also be used for an image or a GPS-track of the geo-locational movement to provide an additional layer of information.
 
-The ***movementType*** has a special relevance here, as it indicates wether this is a planned transport movement or an acually performed one.
+The ***movementType*** has a special relevance here, as it indicates wether this is a planned transport movement or an already  performed one.
 
-### transportMeans LO
+## transportMeans LO
 
 The ***transportMeans*** describes the means of transportation used to perfom for the linked transportMovement. Classical examples are a truck that performs a road leg for a transportation from the forwarder´s hub to the carrier´s origin airport, or a Boeing 777 freighter to perform a flight from Frankfurt to Rio de Janeiro. 
 
-#### typicalFuelConsumption
+### Data field: typicalFuelConsumption
 
 The ***typicalFuelConsumption*** describes an average amount of fuel for a defined distance, e.g. 12 l / 100 km. This does not include the type of fuel, as one of the assumptions is that the consumption doesn´t depend on the type of fuel. When using this, the ***unit*** data field is quite extensively used, with a content like "l/100km".
 
-#### typicalCO2Coefficient
+### Data field: typicalCO2Coefficient
 
 The ***typicalCO2Coefficient*** describes ???
 
-## API use
+## tbd
+
+The purpose of this Logistics Objects is to share actual emissions for a Transport Movement. It´s main purpose is share this data between operator and other interested parties 
+
+### Data field: 
+
+## piece LO
+
+The Piece is the central unit of the ONE Record data model, and thus climate impact should be calculated and published on this level. If no detailed piece information is available, the total gross weight of the shipment is evenly distributed amoungst the pieces of the shipment. The total number of pieces should also be known. If the weights of individual pieces are known, they must be taken into account.
+
+The pieces LO only serves to provide base data, not effective 
+
+## ClimateEffect LO
+
+# API use
 
 ### Technical setting
 
