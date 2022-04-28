@@ -14,9 +14,11 @@ As there are no legal or operational restrictions, the solution can be used worl
 ### Creators
 This document is the outcome of a ONE Record pilot project with the "Digitales Testfeld Air Cargo" by the German air cargo community. Parties/Persons involved were:
 
-Lufthansa Cargo, Philipp Billion (in lead)
+Lufthansa Cargo, Philipp Billion
 
-SOUVEREIGN
+Souvereign, Heidi Han Yin Luu
+
+Souvereign, Moritz Tölke
 
 Fraunhofer IML, Oliver Ditz
 
@@ -133,7 +135,6 @@ This indicator can be either "measured" or "calculated" (TBD: Obsolete due to th
 
 This indicator can be either "measured" or "calculated" (TBD: Obsolete due to the ISO Levels bringing clear indicators here?)
 
-
 ### Other data fields
 
 Other data fields like ***departureLocation*** and ***arrivalLocation*** could be used to verify the CO2-Emission relevant data sources. Additionally, relevant information could be added as an ***externalReference***, if only available as PDF. This could also be used for an image or a GPS-track of the geo-locational movement to provide an additional layer of information.
@@ -162,9 +163,11 @@ The purpose of this Logistics Objects is to share actual emissions for a Transpo
 
 The Piece is the central unit of the ONE Record data model, and thus climate impact should be calculated and published on this level. If no detailed piece information is available, the total gross weight of the shipment is evenly distributed amoungst the pieces of the shipment. The total number of pieces should also be known. If the weights of individual pieces are known, they must be taken into account.
 
-The pieces LO only serves to provide base data, not effective 
-
 ## ClimateEffect LO
+
+The ***climateEffect*** LO is the Logistics Object documenting the effective climate impact of the transportation of the piece within the data provider´s transportation part of the supply chain. It has a *****
+
+Thus, the carrier
 
 # API use
 
@@ -174,7 +177,16 @@ The pieces LO only serves to provide base data, not effective
 
 ## Results / Summary
 
-## Additional comments
+## Additional comments / FAQs
+
+### How do we deal with missing piece information?
+
+Principally, the ONE Record data model is based on the piece. Thus the ***climateImpact*** LO is linked to the piece, never the shipment. Thus we seem to have a problem, if e.g. the weights of each piece are missing, as this is a relevant factor for climate Impact calculation. 
+
+But even if *detailed* piece information are not available, the number of pieces is usually available. In that case, the ***totalGrossWeight*** of the shipment is divided over the number of pieces. Meaning that it is assumed that all pieces have the same weight. This procedure is called the "use of piece skeletons". But this approach is only to be applied, if there´s no piece information available. If piece information are available, they must be taken into account for the climate impact calculation.
+
+If a consumer wants to consume the ***climateImpact*** on shipment level, it is required to sum up the ***climateImpact*** of all pieces within the shipment. Providing the climate impact on shipment level is not possible within ONE Record.
+
 
 Calculation on piece level: indicator, if calculation was perfomed on piece-level or not
 
