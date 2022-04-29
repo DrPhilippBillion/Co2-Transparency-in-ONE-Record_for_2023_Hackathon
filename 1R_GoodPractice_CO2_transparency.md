@@ -86,6 +86,10 @@ While all climate data exchange around ***transportMeans*** and ***transportMove
 |Provider of data	|Operators (Airline, Trucking Company, etc.)|"Supply chain orchestrators" (can be airlines, forwarders, booking platforms)|
 |Target Group / Data consumers |"Supply chain orchestrators" (can be airlines, forwarders, booking platforms)|Shippers, end customers, etc.|
 
+The following diagram shows the relevant data fields in the ONE Record data model:
+
+![DataModel](docs/data model extension.drawio.svg)
+
 ## transportMovement LO
 
 The TransportMovement directly contains emission-relevant data: The ***distanceMeasured***, the ***distanceCalculated***, the ***fuelType***, the ***fuelAmountMeasured***, the ***fuelAmountCalculated*** and a link towards the correlating CO2-Emissions ***CO2Emissions*** (1:n link).
