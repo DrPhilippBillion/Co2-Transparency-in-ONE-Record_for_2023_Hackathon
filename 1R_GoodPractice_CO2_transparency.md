@@ -88,7 +88,7 @@ While all climate data exchange around ***transportMeans*** and ***transportMove
 
 The following diagram shows the relevant data fields in the ONE Record data model:
 
-![DataModel](docs/data model extension.drawio.svg)
+![DataModel](docs/dm.svg)
 
 ## transportMovement LO
 
