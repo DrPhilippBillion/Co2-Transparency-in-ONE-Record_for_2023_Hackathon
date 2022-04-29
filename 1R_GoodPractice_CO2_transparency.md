@@ -30,14 +30,11 @@ This document is to be used and continously developed, even if the current major
 
 ### Use and reference
 
-This Good Practice is free to access and use. 
-
-Please mention the use of this Good practice and provide a link to the Github repository as a source.
+This Good Practice is free to access and use. If you use it, please refer to this document explicitly plus provide a link to the Github repository as source. This will ensure know-how-transfer and transparency.
 
 ### Publication date, version and history
 
 Publication date, version and history should be provided by the Github version control system and not be duplicated here.
-
 
 ## Dependencies
 
@@ -117,6 +114,8 @@ Option 3: create a new measured value totalLoadedWeight; most accurate, but also
 
 ## payloadDistance LO
 
+The ***payloadDistance*** LO describes the relevant factor for the climateImpact calculation on a truck.
+
 ### Data field: payloadDistanceResult (value)
 
 The payloadDistanceResult is a most relevant parameter for the estimation of the climate impact of this transportMovement. It is usually calculated by multiplying the weight and the distance of the transportMovement. Possible units are kilogram-kilometre ("kgkm"), tonne-kilometre ("tkm"), kilometre-tonne ("kmt") and "ton-mile", which is in the US: 1 ton-mile * ( 0.907185 t / short ton) * ( 1.609344 km / mile ) = 1.460 tkm.
@@ -129,11 +128,15 @@ TBD here, e.g. is there a level including the deadhead legs? Etc.
 
 ### FuelConsumptionParameter
 
-This indicator can be either "measured" or "calculated" (TBD: Obsolete due to the ISO Levels bringing clear indicators here?)
+This indicator can be either "measured" or "calculated". It describes the calculation basis for the calculation result, and not the data basis, which can be found in the the ***fuelAmountMeasured*** and ***fuelAmountCalculated*** of the transportMovement (TBD: Obsolete due to the ISO Levels bringing clear indicators here?).
 
 ### DistanceParameter
 
-This indicator can be either "measured" or "calculated" (TBD: Obsolete due to the ISO Levels bringing clear indicators here?)
+This indicator can be either "measured" or "calculated". It describes the calculation basis for the calculation result, and not the data basis, which can be found in the the ***distanceMeasured*** and ***distanceCalculated*** of the transportMovement (TBD: Obsolete due to the ISO Levels bringing clear indicators here?)
+
+### CO2CoefficiencyFactor
+
+**tbd** required?
 
 ### Other data fields
 
@@ -151,11 +154,7 @@ The ***typicalFuelConsumption*** describes an average amount of fuel for a defin
 
 ### Data field: typicalCO2Coefficient
 
-The ***typicalCO2Coefficient*** describes ???
-
-## tbd
-
-The purpose of this Logistics Objects is to share actual emissions for a Transport Movement. It´s main purpose is share this data between operator and other interested parties 
+The ***typicalCO2Coefficient*** describes ??? required?
 
 ### Data field: 
 
@@ -163,11 +162,54 @@ The purpose of this Logistics Objects is to share actual emissions for a Transpo
 
 The Piece is the central unit of the ONE Record data model, and thus climate impact should be calculated and published on this level. If no detailed piece information is available, the total gross weight of the shipment is evenly distributed amoungst the pieces of the shipment. The total number of pieces should also be known. If the weights of individual pieces are known, they must be taken into account.
 
+
+### Data field: grossWeight
+
+The data field ***grossWeight*** within the piece LO describes the weight of the piece, and thus is to be used for the impact calculation
+
+### Data field: skeletonBy
+
+The data field ***skeletonBy*** aims for providing information, if and by whom a piece skeleton was created. Skeleton pieces are placeholders, if the owning party does not provide piece information (usually the Shipper). In that case, the totalGrossWeight of the shipment is evently distributed over the number of pieces, and thus pieces skeletons are created with a generic UPID. If the field is filled with content, piece skeletons were created, if left blank, piece information is available. Piece skeletons can be created by any party. Once piece skeletons are used, they are to be used along the supply chain for any piece-level purpose, instead of creating new piece skeletons by downflow parties.
+
+
 ## ClimateEffect LO
 
-The ***climateEffect*** LO is the Logistics Object documenting the effective climate impact of the transportation of the piece within the data provider´s transportation part of the supply chain. It has a *****
+The ***climateEffect*** LO is the Logistics Object documenting the effective climate impact of the transportation of the piece. Each stakeholder should quantify the effect for his own part of the transportation chain, meaning the carrier should provide information for all legs under the MAWB contract, including flight legs, RFS, etc., the forwarder should provide all transportation legs under his control (usually the HAWB), including the carriers legs, etc. To clearly indicate these "embedded" emissions, a climateEffect can contain "embedded" climateEffects.
 
-Thus, the carrier
+### Data field: CO2equivalentWTW
+
+**tbd**
+
+### Data field: CO2equivalentTTW
+
+**tbd**
+
+### Data field: MethodName
+
+This field contains the name of the method applied.
+
+### Data field: MethodVersion
+
+This field contains the version of the method calculation, if available.
+
+### Data field: MethodLink
+
+This data field contains a URL to more details on the calculation method applied.
+
+### Data field: Verification
+
+**tbd**
+
+### Data field: Accreditation
+
+**tbd**
+
+### Data field: TransportActivity
+
+### Data field:  includedClimateEffects
+
+This data field contains linked climateEffect calculation of embedded transport activites (see remarks above) 
+
 
 # API use
 
@@ -186,18 +228,3 @@ Principally, the ONE Record data model is based on the piece. Thus the ***climat
 But even if *detailed* piece information are not available, the number of pieces is usually available. In that case, the ***totalGrossWeight*** of the shipment is divided over the number of pieces. Meaning that it is assumed that all pieces have the same weight. This procedure is called the "use of piece skeletons". But this approach is only to be applied, if there´s no piece information available. If piece information are available, they must be taken into account for the climate impact calculation.
 
 If a consumer wants to consume the ***climateImpact*** on shipment level, it is required to sum up the ***climateImpact*** of all pieces within the shipment. Providing the climate impact on shipment level is not possible within ONE Record.
-
-
-Calculation on piece level: indicator, if calculation was perfomed on piece-level or not
-
-Ebene: typicalCO2Coefficient
-Type: 
-  calculation approach
-    Rundlauf: 
-    Intensitätswert
-
-CO2Coefficient / CO2E IntensityFactor
-
-Nicht CO2, aber climate relevant
-TTW
-- if meeasured timeframe: 
