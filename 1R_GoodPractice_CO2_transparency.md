@@ -142,12 +142,6 @@ The following diagram shows the relevant data fields in the ONE Record data mode
 
 ![DataModel](docs/dm2.svg) 
 
-Correktion: 1:n piece vs. transportMovement
-1:n piece vs. climate effects
-EmissionIntensivityFactor
-
-1:n transportMovement vs. effectsLO
-
 ## transportMovement LO
 
 The TransportMovement directly contains emission-relevant data: The ***distanceMeasured***, the ***distanceCalculated***, the ***fuelType***, the ***fuelAmountMeasured***, the ***fuelAmountCalculated*** and a link towards the correlating CO2-Emissions ***CO2Emissions*** (1:n link).
