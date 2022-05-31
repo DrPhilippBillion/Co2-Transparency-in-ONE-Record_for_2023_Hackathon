@@ -142,6 +142,12 @@ The following diagram shows the relevant data fields in the ONE Record data mode
 
 ![DataModel](docs/dm.svg)
 
+Correktion: 1:n piece vs. transportMovement
+1:n piece vs. climate effects
+EmissionIntensivityFactor
+
+1:n transportMovement vs. effectsLO
+
 ## transportMovement LO
 
 The TransportMovement directly contains emission-relevant data: The ***distanceMeasured***, the ***distanceCalculated***, the ***fuelType***, the ***fuelAmountMeasured***, the ***fuelAmountCalculated*** and a link towards the correlating CO2-Emissions ***CO2Emissions*** (1:n link).
@@ -152,7 +158,12 @@ If available, the actually measured distance is provided in the ***distanceMeasu
 
 ### Data field: fuelType
 
-The ***fuelType*** data field should indicate the fuel that was consumed for this ***transportMovement***. "Kerosene", "SAF", "Renewable electric energy" are examples for possible values ***CHECK ON LIST HERE***.
+The ***fuelType*** data field should indicate the fuel that was consumed for this ***transportMovement***. "Kerosene", "SAF", "Renewable electric energy" are examples for possible values ***no standardized list, list by ISO expected; Moritz: standard-liste Referenz***. 
+1:n
+***Energy Carrier***
+***FeedStock***
+***FeedStockShare***
+Data exchange guidance Table 6 (Mail vom 29.4.2022)
 
 ### Data fields: fuelAmountMeasured and fuelAmountCalculated
 
