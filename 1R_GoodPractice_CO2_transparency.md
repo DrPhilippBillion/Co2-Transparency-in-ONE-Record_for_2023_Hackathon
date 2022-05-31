@@ -140,7 +140,7 @@ While all climate data exchange around ***transportMeans*** and ***transportMove
 
 The following diagram shows the relevant data fields in the ONE Record data model:
 
-![DataModel](docs/dm.svg) 
+![DataModel](docs/dm2.svg) 
 
 Correktion: 1:n piece vs. transportMovement
 1:n piece vs. climate effects
