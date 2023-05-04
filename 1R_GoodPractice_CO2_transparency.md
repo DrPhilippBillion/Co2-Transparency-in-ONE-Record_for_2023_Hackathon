@@ -1,61 +1,9 @@
 # Providing CO2 Transparency in ONE Record
 
-- [Providing CO2 Transparency in ONE Record](#providing-co2-transparency-in-one-record)
-  * [Basic Information on this document](#basic-information-on-this-document)
-    + [Objective](#objective)
-    + [Target audience](#target-audience)
-    + [Geographical coverage](#geographical-coverage)
-    + [Creators](#creators)
-    + [Continous development and availability](#continous-development-and-availability)
-    + [Use and reference](#use-and-reference)
-    + [Publication date, version and history](#publication-date--version-and-history)
-  * [Dependencies](#dependencies)
-    + [Standards applied](#standards-applied)
-    + [ONE Record Server Implementation used](#one-record-server-implementation-used)
-    + [Other Software products used](#other-software-products-used)
-  * [Assumptions](#assumptions)
-  * [Solution approach](#solution-approach)
-  * [Solution in current environment](#solution-in-current-environment)
-- [Data use and target process](#data-use-and-target-process)
-  * [transportMovement LO](#transportmovement-lo)
-    + [Data fields: distanceMeasured and distanceCalculated](#data-fields--distancemeasured-and-distancecalculated)
-    + [Data field: fuelType](#data-field--fueltype)
-    + [Data fields: fuelAmountMeasured and fuelAmountCalculated](#data-fields--fuelamountmeasured-and-fuelamountcalculated)
-    + [Data field: totalLoadedWeight](#data-field--totalloadedweight)
-  * [payloadDistance LO](#payloaddistance-lo)
-    + [Data field: payloadDistanceResult (value)](#data-field--payloaddistanceresult--value-)
-    + [ISOTransparencyLevel (int)](#isotransparencylevel--int-)
-    + [FuelConsumptionParameter](#fuelconsumptionparameter)
-    + [DistanceParameter](#distanceparameter)
-    + [CO2CoefficiencyFactor](#co2coefficiencyfactor)
-    + [Other data fields](#other-data-fields)
-  * [transportMeans LO](#transportmeans-lo)
-    + [Data field: typicalFuelConsumption](#data-field--typicalfuelconsumption)
-    + [Data field: typicalCO2Coefficient](#data-field--typicalco2coefficient)
-    + [Data field:](#data-field-)
-  * [piece LO](#piece-lo)
-    + [Data field: grossWeight](#data-field--grossweight)
-    + [Data field: skeletonBy](#data-field--skeletonby)
-  * [ClimateEffect LO](#climateeffect-lo)
-    + [Data field: CO2equivalentWTW](#data-field--co2equivalentwtw)
-    + [Data field: CO2equivalentTTW](#data-field--co2equivalentttw)
-    + [Data field: MethodName](#data-field--methodname)
-    + [Data field: MethodVersion](#data-field--methodversion)
-    + [Data field: MethodLink](#data-field--methodlink)
-    + [Data field: Verification](#data-field--verification)
-    + [Data field: Accreditation](#data-field--accreditation)
-    + [Data field: TransportActivity](#data-field--transportactivity)
-    + [Data field:  includedClimateEffects](#data-field---includedclimateeffects)
-- [API use](#api-use)
-    + [Technical setting](#technical-setting)
-    + [Basic API-Features used](#basic-api-features-used)
-  * [Results / Summary](#results---summary)
-  * [Additional comments / FAQs](#additional-comments---faqs)
-    + [How do we deal with missing piece information?](#how-do-we-deal-with-missing-piece-information-)
 ## Basic Information on this document
 
 ### Objective 
-The purpose of this document is to provide a Good Practice for end2end and multi-modal CO2 emission transparency in the IATA ONE Record-based data eco-system.
+The purpose of this document is to provide a Good Practice for end2end and multi-modal Greenhouse Gas emission transparency in the IATA ONE Record-based data eco-system. This document is supposed to suggest a first implementation guide for closing the bridge between the "Greenhouse Gas Logistics Emissions Data Model" of the Smart Freight Center and ONE Record. At a later stage, the Smart Freight Center should be able to integrate and maintain their data model in the context of a modular integration in ONE Record independently from this approach.
 
 ### Target audience
 This document can be used by any party with the interest of using digital accompanying documents in ONE Record. 
@@ -66,11 +14,11 @@ As there are no legal or operational restrictions, the solution can be used worl
 ### Creators
 This document is the outcome of a ONE Record pilot project with the "Digitales Testfeld Air Cargo" by the German air cargo community. Parties/Persons involved were:
 
-Lufthansa Cargo, Philipp Billion
-
-Souvereign, Heidi Han Yin Luu
+Lufthansa Cargo, Dr. Philipp Billion
 
 Souvereign, Moritz Tölke
+
+Frankfurt University of Applied Sciences, Niclas Scheiber
 
 Fraunhofer IML, Oliver Ditz
 
@@ -78,7 +26,7 @@ Lufthansa Industry Solutions, Daniel Döppner
 
 ### Continous development and availability
 
-This document is to be used and continously developed, even if the current major stakeholders should move to other topics. Thus a "handover" in Github is planned if responsibilities should shift.
+Subsequently, the responsibility for this topic/document should be handed over to the Smart Freight Center. This document is to be used and continously developed, even if the current major stakeholders should move to other topics. Thus a "handover" in Github is planned if responsibilities should shift.
 
 ### Use and reference
 
@@ -92,9 +40,9 @@ Publication date, version and history should be provided by the Github version c
 
 ### Standards applied
 
-The ONE Record business ontology version as of APR 13, 2022 was used [Working draft Ontology of 2022APR13](https://github.com/IATA-Cargo/ONE-Record/blob/bbe86e364b04d6a6279f0ab6e9ee47e1905ec9c4/working_draft/ontology/IATA-1R-DM-Ontology.ttl).
+UPDATE REQUIRED!! The ONE Record business ontology version as of APR 13, 2022 was used [Working draft Ontology of 2022APR13](https://github.com/IATA-Cargo/ONE-Record/tree/api_2.0.0-dev/working_draft/API).
 
-The ONE Record API and security specification draft witout a version as of APR 13, 2022 was used (no link available yet).
+The ONE Record API and security specification draft of version 2.0 as of MAY 2nd, 2023 was used: [API and Security specification v2.0 Release Candidate](https://github.com/IATA-Cargo/ONE-Record/tree/api_2.0.0-dev/working_draft/API).
 
 ### ONE Record Server Implementation used
 
@@ -102,45 +50,84 @@ The ONE Record API and security specification draft witout a version as of APR 1
 
 ### Other Software products used
 
+(none so far)
+
 ## Assumptions
 
-One or more stakeholders are able to provide CO2 transparency on their segments of the transport, other stakeholders are interested and capable of consuming this data.
-
-A central assumption is that there is an interest of stakeholders to recieve CO2 transparency on piece level, end2end, multi-modal.
+One or more stakeholders are able to provide greenhouse gas emission transparency on their segments of the transport, other stakeholders are interested and capable of consuming this data. A central assumption is that there is an interest of stakeholders to recieve CO2 transparency on piece level, end2end, multi-modal.
 
 ## Solution approach
 
 The ONE Record data model follows two principles: Piece-centricity and physics-orientation. Piece-centricity is self-explanatory, as every information is linked with the piece as the lowest available transportation object. Physics-orientation means that the linking strucutre of ONE Record follows the structures of the physical world (for more details, please refer to [ONE Record Github Repository](https://github.com/IATA-Cargo/ONE-Record).
 
-The problem here is that the two principles are "collading" by some aspects here: The CO2-Emissions happen to the ***TransportMeans*** as trucks and planes burn fuel, not pieces or shipments. On the other hand, it would not help a data consumer to know that the aircraft with it´s piece onboard burnt a specific ammount of fuel without a brakedown to it´s piece. To close this gap, a set of data objects and process descriptions is described here to enable end-to-end, multi-modal CO2 tracking throughout the supply chain.
+The problem here is that the two principles are "collading" by some aspects here: The CO2-Emissions happen to ***Activities*** as trucks and planes burn fuel during the transportation process, not pieces or shipments by themselfes. On the other hand, it would not help a data consumer to know that the aircraft with it´s piece onboard burnt a specific ammount of fuel without a brakedown to it´s piece. To close this gap, a set of data objects and process descriptions is described here to enable end-to-end, multi-modal CO2 tracking throughout the supply chain.
 
 The vision of this approach is to give even to consumers a transparency on CO2 emissions potentially from the production site to his door, covering all movement of the piece.
 
-Principally, the approach does not define a CO2-Emission calculation methode, but supports any methode, and even the option of providing results for different calculation methods. It also enables transparency on the calculation parameters (fuel burnt, distances, etc.), their acquisition methode (measured, calculated), so a data consumer could potentially apply his own calculation method.
+Principally, the approach does not define a GHG-emission calculation methode, but supports any methode, and even the option of providing results for different calculation methods. It also enables transparency on the calculation parameters (fuel burnt, distances, etc.), their acquisition methode (measured, calculated), so a data consumer could potentially apply his own calculation method.
 
 ## Solution in current environment
 
 In the legacy messaging environment, end to end CO2 emission tracking on piece level isn´t possible. Generic solutions for transparency on shipment level are in place, but don´t follow a standardized approach for different modes of transportation.
 
+
+## GLEC Data Model and ONE Record Data Model Terminology
+
+To avoid a new, unaligned approach to CO2-measurement, the GLEC Data Model is the basis for GHG-emission transparency in ONE Record. The terminology of the GLEC Framework and ONE Record is quite similar, but not completely identical. Differences in the terminology are minor enough to be accepted. In the following good practice, the terms will be used according to the ONE Record definition, but with remarks to identify significant differences.
+
+### "Shipment"
+
+GLEC Terminology: A shipment is an identifiable collection of one or more freight items to be transported together from the original shipper to the ultimate consignee. A shipment may be transported in one or a multiple number of consignments. A shipment can be aggregated or disaggregated to different consignments according to the requirements of the means of transportation on any one element of the transport chain, e.g., single bulk units and packages can be aggregated on a pallet and such pallet can be handed over as a unit for aggregation in a container, which in turn is treated as a consignment in a vehicle.
+
+ONE Record: A shipment is physical freight by a shipper transported under one contract by a carrier, so this definition does not fit here. Instead, this definition fits best with the piece-definition of ONE Record and it's ability to reflect the physical world with the piece-in-piece-concept. But there is one limitation: Pure loading devices like containers or pallets are usually defined as LoadingUnits in ONE Record.
+
+Conclusion: A "shipment": in the GLEC Terminology is either a single piece in ONE Record or a single piece plus a loadingUnit. 
+
+### "Consignment"
+
+GLEC Terminology: A consignment separately identifiable amount of freight transported from one consignor to one consignee via one or more modes of transport.
+
+ONE Record: No use of the term "consignment", the definition indicates a use like the ONE Record term "shipment".
+
+Conclusion: A consignment in the GLEC terminology can be matched with a shipment in ONE Record, either a master AWB (if concluded between a forwarder and a carrier), or a house AWB (if concluded between a shipper and a forwarder).
+
+### "Transport chain element (TCE)"
+
+GLEC Terminology: A transport chain element (TCE) is a section of a transport chain within which the freight is carried by a single vehicle or transits through a single hub.
+
+ONE Record: No use of term "Transport chain element (TCE)", but the same function is covered by the "TransportMovement LO", with the limtation to a single leg. But as a transportMovement LO is always a single leg, there is no "transit through a single hub" in ONE Record like in the GLEC Terminology.
+
+Conclusion: Same terminological approach, but the granularity is higher in the ONE Record use of the "TransportMovement LO". This should not lead to significant problems, as data on a higher granularity can be aggregated. 
+
+### "Transport operation category (TOC)"
+
+GLEC Terminology: A transport operation category (TOC) is a group of transport operations that share similar characteristics.
+
+ONE Record: ONE Record uses activities, and subsets of activities can be clustered according to their characteristics.
+
+Conclusion: Transport operations can be matched without problems with a variety of transport related Activities in ONE Record.  
+
+### "Hub operation category (HOC)"
+
+GLEC Terminology: A hub operation category (HOC) is a group of hub operations that share similar characteristics.
+
+ONE Record: ONE Record uses activities, and a subset of those activities are performed in the hub. There is no clustering into "hub operations" so far.
+
+Conclusion: Hub operation can be matched without problems with hub related Activities in ONE Record.
+
+
 # Data use and target process
 
-Climate relevant emissions are performed by a ***transportMeans*** on a ***transportMovement***, because a ***transportMeans*** does not produce emissions by itself (e.g. a plane that isn´t flying), the primary attribution of CO2-Emissions is linked with the ***transportMovement***. The ***transportMovement*** can be any movement of pieces, like a Truck leg, a flight, or even a forklift-movement. 
+Principally, the measurement of GHG Emissions in ONE Record follows the GLEC approach. The following guideline is supposed to line out the practical application within the ONE Record environment.
 
-While all climate data exchange around ***transportMeans*** and ***transportMovement*** serves for submitting the data basis for climate impact calculation between different stakeholders of the supply chain, the following climate impact data on piece level serves to fulfill the estimation of the actual impact of the transport on the climate.
+In ONE Record, climate relevant emissions are performed within the framework of ***activities*** , because an aircraft, a truck or a forklift do not produce emissions by themselfes (e.g. a plane that isn´t flying), thus the primary attribution of CO2-Emissions is linked with the ***activity***. Principally, any movement of pieces, like a Truck leg, a flight, or even a forklift-movement can be an activity, but also summarized activities like "warehousing" or "checks" can be used here to share GHG Emission data. On top, several activities can be combined into a service. That complete service can also provide CO2-Emission calculations.
+
+While all climate data exchange around ***activities*** serves for submitting the data basis for climate impact calculation between different stakeholders of the supply chain, the end user relevant climate impact data on piece level aims to fulfill the estimation of the actual impact of the transport on the climate for the shipper of the piece.
+
+The following table illustrates a matching between the GLEC GHG Data Model and the ONE Record data model v3.0:
 
 
 
-|   	|Physical object with climate impacting emissions|Climate impacting attributions on piece level|
-|---	|---	|---	|
-|Focus LOs  	|***transportMeans***, ***TransportMovement***, ***payloadDistance***|***piece***, ***climateEffect***|
-|Example|RFS Truck from AMS to CDG caused 12t  
-|Purpose|Provide basic data for climate impact calculation on piece level|Provide transparency on climate impact of transport on piece level|
-|Provider of data	|Operators (Airline, Trucking Company, etc.)|"Supply chain orchestrators" (can be airlines, forwarders, booking platforms)|
-|Target Group / Data consumers |"Supply chain orchestrators" (can be airlines, forwarders, booking platforms)|Shippers, end customers, etc.|
-
-The following diagram shows the relevant data fields in the ONE Record data model:
-
-![DataModel](docs/dm2.svg) 
 
 ## transportMovement LO
 
