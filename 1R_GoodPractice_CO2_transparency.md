@@ -56,7 +56,7 @@ Following the principleas of the SmartFreightCenter-approach, an integration dra
 
 The following diagram shows the correlation between the existing and the new data for climate impact transparency in ONE Record:
 
-![Data Model Diagram(CO2 for hackathon.drawio.svg "Climate Impact in ONE Record")
+![Data Model Diagram(datamodel.svg "Climate Impact in ONE Record")
 
 ## Solution in legacy environment
 
