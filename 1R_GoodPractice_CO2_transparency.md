@@ -54,7 +54,11 @@ One or more stakeholders are able to provide greenhouse gas emission transparenc
 
 Following the principleas of the SmartFreightCenter-approach, an integration draft was created, but with some limitations: According to the piece-centricity approach of ONE Record, climate effects are to be provided on piece-level. That is a narrowed down approach to the SmartFreightCenter-approach, where emissions can also be provided on shipment level.
 
-## Solution in current environment
+The following diagram shows the correlation between the existing and the new data for climate impact transparency in ONE Record:
+
+![Data Model Diagram(CO2 for hackathon.drawio.svg "Climate Impact in ONE Record")
+
+## Solution in legacy environment
 
 In the legacy messaging environment, end to end CO2 emission tracking on piece level isn´t possible. Generic solutions for transparency on shipment level are in place, but don´t follow a standardized approach for different modes of transportation.
 
