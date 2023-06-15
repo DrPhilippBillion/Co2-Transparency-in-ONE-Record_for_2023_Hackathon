@@ -108,7 +108,7 @@ ONE Record: ONE Record uses activities, and a subset of those activities are per
 Conclusion: Hub operation can be matched without problems with hub related Activities in ONE Record.
 
 
-# Data use and target process
+## Data use and target process
 
 In ONE Record, climate relevant emissions are performed within the framework of ***activities*** , because an aircraft, a truck or a forklift do not produce emissions by themselfes (e.g. a plane that isn´t flying), thus the primary attribution of CO2-Emissions is linked with the ***activity***. Principally, any movement of pieces, like a Truck leg, a flight, or even a forklift-movement can be an activity, but also summarized activities like "warehousing" or "checks" can be used here to share GHG Emission data.
 
@@ -116,37 +116,37 @@ While all climate data exchange around ***activities*** serves for submitting th
 
 Important hint: The definitions of the additional, CO2 emission-related data fields, can be found in the "Data exchange of GHG Logistics Emissions - Guidance" by SmartFreightCenter, as of MARCH 2023 and will not be repeated here.
 
-## transportMovement 
+### transportMovement 
 
 The TransportMovement directly contains emission-relevant data like ***distanceMeasured***, ***distanceCalculated***,  ***loadFactor***, ***loadFactorRemarks***, an indicator for "empty" flights ***positioningFlight*** and links towards the data objects ***ClimateEffect***, ***toc***, and ***EnergyFeedstock***.
 
-## transportMeans
+### transportMeans
 
 The ***transportMeans*** describes the means of transportation used to perfom for the linked transportMovement. Classical examples are a truck that performs a road leg for a transportation from the forwarder´s hub to the carrier´s origin airport, or a Boeing 777 freighter to perform a flight from Frankfurt to Rio de Janeiro. For road transport, the ***emissionClass*** is specifically relevant.
 
-## energyFeedstock
+### energyFeedstock
 
 The Energy feedstock reflects the energy used to perform the transportMovement. As this is in a 1:n relationship with the transportMovement, it can reflect shares like 30% kerosene and 70% SAF.
 
-## toc
+### toc
 
 The toc ("Transport Operation Category") reflects the parameters for the climate effect calculation as described in the "Data exchange of GHG Logistics Emissions - Guidance" by SmartFreightCenter.  
 
-## piece
+### piece
 
 The Piece is the central unit of the ONE Record data model, and thus climate impact should be calculated and published on this level. If no detailed piece information is available, the total gross weight of the shipment is evenly distributed amoungst the pieces of the shipment. The total number of pieces should also be known. If the weights of individual pieces are known, they must be taken into account.
 
-## climateEffect
+### climateEffect
 
 The ***climateEffect*** is the object documenting the effective climate impact of the transportation of the piece. Each stakeholder should quantify the effect for his own part of the transportation chain, meaning the carrier should provide information for all legs under the MAWB contract, including flight legs, RFS, etc., the forwarder should provide all transportation legs under his control (usually the HAWB), including the carriers legs, etc. 
 
-# API use
+## API use
 
 No specific requirements here.
 
-# FAQ
+## FAQ
 
-## How do we deal with missing piece information?
+### How do we deal with missing piece information?
 
 Principally, the ONE Record data model is based on the piece. Thus the ***climateImpact*** LO is linked to the piece, never the shipment. Thus we seem to have a problem, if e.g. the weights of each piece are missing, as this is a relevant factor for climate Impact calculation. 
 
