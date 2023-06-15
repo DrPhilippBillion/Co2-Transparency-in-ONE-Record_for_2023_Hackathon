@@ -140,7 +140,9 @@ The ***climateEffect*** is the object documenting the effective climate impact o
 
 No specific requirements here.
 
-### How do we deal with missing piece information?
+# FAQ
+
+## How do we deal with missing piece information?
 
 Principally, the ONE Record data model is based on the piece. Thus the ***climateImpact*** LO is linked to the piece, never the shipment. Thus we seem to have a problem, if e.g. the weights of each piece are missing, as this is a relevant factor for climate Impact calculation. 
 
