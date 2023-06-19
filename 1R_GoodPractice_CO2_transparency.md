@@ -40,7 +40,7 @@ Publication date, version and history should be provided by the Github version c
 
 ### Standards applied
 
-The ONE Record business ontology version 3.0 as of APR 13, 2022 was used.
+The ONE Record business ontology version 3.0 as of APR 13, 2022 was used with the additional data fields as described here.
 
 The ONE Record API and security specification draft of version 2.0 as of JUNE 15th, 2023 (https://ddoeppner.github.io/ONE-Record/).
 
