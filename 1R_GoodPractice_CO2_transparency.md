@@ -56,7 +56,7 @@ Following the principleas of the SmartFreightCenter-approach, an integration dra
 
 The following diagram shows the correlation between the existing and the new data for climate impact transparency in ONE Record:
 
-![Data Model Diagram](GLEC Framework in 1R - V0.1[41].jpg "Climate Impact data in ONE Record")
+![Data Model Diagram](GLEC1R.jpg "Climate Impact data in ONE Record")
 
 ## Solution in legacy environment
 
