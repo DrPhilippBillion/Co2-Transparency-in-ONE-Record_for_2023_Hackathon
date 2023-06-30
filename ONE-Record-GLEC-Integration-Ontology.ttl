@@ -1,0 +1,669 @@
+@prefix : <https://onerecord.iata.org/ns/glecf#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix cargo: <https://onerecord.iata.org/ns/cargo#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@base <https://onerecord.iata.org/ns/glecf> .
+
+<https://onerecord.iata.org/ns/glecf> rdf:type owl:Ontology ;
+                                       owl:versionIRI <https://onerecord.iata.org/ns/glecf/0.1.1> ;
+                                       dc:description """Extension to the ONE Record vocabulary integrating the GLEC framework, described using W3C RDF Schema and the Web Ontology Language.
+
+Depends on the ONE Record data model (cargo ontology) of version 3.0.0 RC 4.1 or later:
+https://github.com/IATA-Cargo/ONE-Record/blob/master/working_draft/ontology/IATA-1R-DM-Ontology.ttl
+
+For further information on the GLEC framework, please refer to the Smart Freight Centre and their provided sources:
+https://www.smartfreightcentre.org/en/
+https://www.feport.eu/images/downloads/glec-framework-20.pdf"""@en ;
+                                       dc:title "ONE Record GLEC framework Integration Ontology"@en ;
+                                       terms:abstract "The ontology of the ONE Record standard is the core data model underlying the Linked Data solution drafted by the ONE Record standard: https://github.com/IATA-Cargo/ONE-Record. ONE Record is a standard for data sharing and creates a single record view of the shipment. This standard defines a common data model for the data that is shared via standardized and secured web API."@en ;
+                                       terms:modified "19-06-2023" ;
+                                       rdfs:comment """Details availalble on GitHub https://github.com/DrPhilippBillion/Co2-Transparency-in-ONE-Record_for_2023_Hackathon
+
+0.1.1
+- Initial trial version for the 2023 Seeheim ONE Record Hackathon"""@en ;
+                                       rdfs:isDefinedBy "https://www.iata.org/one-record/ns/glecf"@en ;
+                                       rdfs:label "ONE Record GLEC framework Integration Ontology"@en ;
+                                       owl:versionInfo "0.1.1"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/abstract
+terms:abstract rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/modified
+terms:modified rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+terms:title rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#comment
+owl:comment rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#maxCardinality
+owl:maxCardinality rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#minCardinality
+owl:minCardinality rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#duration
+xsd:duration rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2002/07/owl#thing
+owl:thing rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://onerecord.iata.org/ns/glecf#dataQualityIndex
+:dataQualityIndex rdf:type owl:ObjectProperty ;
+                  rdfs:domain :ClimateEffect ;
+                  rdfs:range :QualityLevel ;
+                  rdfs:comment "TBC (Definition from E2E. Calculated with respect to % of emissions)"@en ;
+                  rdfs:label ":dataQualityIndex"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#elementClimateEffects
+:elementClimateEffects rdf:type owl:ObjectProperty ;
+                       rdfs:domain :TransportChainElement ;
+                       rdfs:range :ClimateEffect ;
+                       rdfs:comment "References to all piece-specific ClimateEffects this TransportChainElement is the base of"@en ;
+                       rdfs:label ":elementClimateEffects"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#energyFeedstocks
+:energyFeedstocks rdf:type owl:ObjectProperty ;
+                  rdfs:domain cargo:TransportMovement ;
+                  rdfs:range :EnergyFeedstock ;
+                  rdfs:comment "Information about the feedstocks used to produce the energyCarrier"@en ;
+                  rdfs:label ":energyFeedstocks"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#energyMeasured
+:energyMeasured rdf:type owl:ObjectProperty ;
+                rdfs:domain cargo:TransportMovement ;
+                rdfs:range cargo:Value ;
+                rdfs:comment "Energy measured for this TransportMovement (measured in l, kg, kWh or MJ per km)"@en ;
+                rdfs:label ":energyMeasured"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#ofPiece
+:ofPiece rdf:type owl:ObjectProperty ;
+         rdfs:domain :ClimateEffect ;
+         rdfs:range cargo:Piece ;
+         rdfs:comment "Reference to the TransportChainElement this ClimateEffect results from"@en ;
+         rdfs:label ":ofPiece"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#ofTransportChainElement
+:ofTransportChainElement rdf:type owl:ObjectProperty ;
+                         rdfs:domain :ClimateEffect ;
+                         rdfs:range :TransportChainElement ;
+                         rdfs:comment "Reference to the Piece this ClimateEffect describes"@en ;
+                         rdfs:label ":ofTransportChainElement"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#pieceClimateEffect
+:pieceClimateEffect rdf:type owl:ObjectProperty ;
+                    rdfs:domain cargo:Piece ;
+                    rdfs:range :ClimateEffect ;
+                    rdfs:comment "References to all ClimateEffects this Piece produced in its lifecycle"@en ;
+                    rdfs:label ":pieceClimateEffect"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#tankToWheelCH4
+:tankToWheelCH4 rdf:type owl:ObjectProperty ;
+                rdfs:domain :TransportChainElement ;
+                rdfs:range cargo:Value ;
+                rdfs:comment "Methane released to atmosphere as a result of vehicle operation (measured in kg)"@en ;
+                rdfs:label ":tankToWheelCH4"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#tankToWheelCO2
+:tankToWheelCO2 rdf:type owl:ObjectProperty ;
+                rdfs:domain :TransportChainElement ;
+                rdfs:range cargo:Value ;
+                rdfs:comment "CO2 released to atmosphere as a result of vehicle operation (measured in kg)"@en ;
+                rdfs:label ":tankToWheelCO2"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#tankToWheelCO2equivalent
+:tankToWheelCO2equivalent rdf:type owl:ObjectProperty ;
+                          rdfs:domain :ClimateEffect ;
+                          rdfs:range cargo:Value ;
+                          rdfs:comment "Greenhouse gases released to atmosphere as a result of vehicle operation (measured in kg)"@en ;
+                          rdfs:label ":tankToWheelCO2equivalent"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#tankToWheelNOX
+:tankToWheelNOX rdf:type owl:ObjectProperty ;
+                rdfs:domain :TransportChainElement ;
+                rdfs:range cargo:Value ;
+                rdfs:comment "Nitrogen oxide released to atmosphere as a result of vehicle operation (measured in kg)"@en ;
+                rdfs:label ":tankToWheelNOX"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#tankToWheelPM
+:tankToWheelPM rdf:type owl:ObjectProperty ;
+               rdfs:domain :TransportChainElement ;
+               rdfs:range cargo:Value ;
+               rdfs:comment "Particulate matter (PM10 and PM2.5) released to atmosphere as a result of vehicle operation (measured in kg)"@en ;
+               rdfs:label ":tankToWheelPM"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#tankToWheelSOX
+:tankToWheelSOX rdf:type owl:ObjectProperty ;
+                rdfs:domain :TransportChainElement ;
+                rdfs:range cargo:Value ;
+                rdfs:comment "Sulphur oxide released to atmosphere as a result of vehicle operation (measured in kg)"@en ;
+                rdfs:label ":tankToWheelSOX"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#transportChainElements
+:transportChainElements rdf:type owl:ObjectProperty ;
+                        rdfs:domain cargo:TransportMovement ;
+                        rdfs:range :TransportChainElement ;
+                        rdfs:comment "References to all TransportChainElements this TransportMovement describes"@en ;
+                        rdfs:label ":transportChainElements"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#wellToWheelCO2
+:wellToWheelCO2 rdf:type owl:ObjectProperty ;
+                rdfs:domain :TransportChainElement ;
+                rdfs:range cargo:Value ;
+                rdfs:comment "CO2 released to atmosphere during the process of producing, storing, processing and distributing an energy carrier for vehicle operation + CO2 released to atmosphere as a result of vehicle operation (measured in kg)"@en ;
+                rdfs:label ":wellToWheelCO2"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#wellToWheelCO2equivalent
+:wellToWheelCO2equivalent rdf:type owl:ObjectProperty ;
+                          rdfs:domain :ClimateEffect ;
+                          rdfs:range cargo:Value ;
+                          rdfs:comment "Greenhouse gases released to atmosphere during the process of producing, storing, processing and distributing an energy carrier for vehicle operation + Greenhouse gases released to atmosphere as a result of vehicle operation (measured in kg)"@en ;
+                          rdfs:label ":wellToWheelCO2equivalent"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#wellToWheelEmissionIntensity
+:wellToWheelEmissionIntensity rdf:type owl:ObjectProperty ;
+                              rdfs:domain :TransportChainElement ;
+                              rdfs:range cargo:Value ;
+                              rdfs:comment "Coefficient relating specified transport activity with GHG emissions"@en ;
+                              rdfs:label ":wellToWheelEmissionIntensity"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://onerecord.iata.org/ns/glecf#accreditation
+:accreditation rdf:type owl:DatatypeProperty ;
+               rdfs:domain owl:Thing ;
+               rdfs:range xsd:boolean ;
+               rdfs:comment "Statement of accreditation of the calculation methodology"@en ;
+               rdfs:label ":accreditation"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#emissionClass
+:emissionClass rdf:type owl:DatatypeProperty ;
+               rdfs:domain cargo:TransportMeans ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Identification of the vehicle emission class (Road). Depending on the geography of operations, this can be adapted"@en ;
+               rdfs:label ":emissionClass"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#energyCarrier
+:energyCarrier rdf:type owl:DatatypeProperty ;
+               rdfs:domain cargo:TransportMovement ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Energy carrier used for powering this TransportMovement, such as Diesel, HVO, petrol, CNG, LNG, LPG, HFO, MGO, Aviation fuel, Hydrogen, Methanol, Electric, etc."@en ;
+               rdfs:label ":energyCarrier"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#energyRemarks
+:energyRemarks rdf:type owl:DatatypeProperty ;
+               rdfs:domain cargo:TransportMovement ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Description of the measuredEnergy and energyCarrier"@en ;
+               rdfs:label ":energyRemarks"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#feedstock
+:feedstock rdf:type owl:DatatypeProperty ;
+           rdfs:domain :EnergyFeedstock ;
+           rdfs:range xsd:string ;
+           rdfs:comment "Feedstock (e.g. fossil, natural gas, grid, renewable electricity, waste)"@en ;
+           rdfs:label ":feedstock"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#feedstockShare
+:feedstockShare rdf:type owl:DatatypeProperty ;
+                rdfs:domain :EnergyFeedstock ;
+                rdfs:range xsd:double ;
+                rdfs:comment "Share of the feedstock of the energy carrier (0 in case only 1 feedstock is applicable, e.g. 0.05 to cover a 5% blend)"@en ;
+                rdfs:label ":feedstockShare"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#loadFactor
+:loadFactor rdf:type owl:DatatypeProperty ;
+            rdfs:domain cargo:TransportMovement ;
+            rdfs:range xsd:double ;
+            rdfs:comment "Ratio of the mass of the actual load to the maximum legally authorized load of a particular vehicle on a TOC level"@en ;
+            rdfs:label ":loadFactor"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#loadFactorRemarks
+:loadFactorRemarks rdf:type owl:DatatypeProperty ;
+                   rdfs:domain cargo:TransportMovement ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Description of derivation of the load factor"@en ;
+                   rdfs:label ":loadFactorRemarks"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#methodLink
+:methodLink rdf:type owl:DatatypeProperty ;
+            rdfs:domain :ClimateEffect ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Link referring to documentation of the CO2 equivalent calculation method"@en ;
+            rdfs:label ":methodLink"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#methodName
+:methodName rdf:type owl:DatatypeProperty ;
+            rdfs:domain :ClimateEffect ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Name of the CO2 equivalent calculation method"@en ;
+            rdfs:label ":methodName"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#methodVersion
+:methodVersion rdf:type owl:DatatypeProperty ;
+               rdfs:domain :ClimateEffect ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Version of the CO2 equivalent calculation method"@en ;
+               rdfs:label ":methodVersion"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#positioningMovement
+:positioningMovement rdf:type owl:DatatypeProperty ;
+                     rdfs:domain cargo:TransportMovement ;
+                     rdfs:range xsd:boolean ;
+                     rdfs:comment "Indicator whether the TransportMovement serves repositioning"@en ;
+                     rdfs:label ":positioningMovement"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#verification
+:verification rdf:type owl:DatatypeProperty ;
+              rdfs:domain owl:Thing ;
+              rdfs:range xsd:boolean ;
+              rdfs:comment "Statement of external verification of the input data"@en ;
+              rdfs:label ":verification"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#wellToWheelFuelEmissionFactor
+:wellToWheelFuelEmissionFactor rdf:type owl:DatatypeProperty ;
+                               rdfs:domain :TransportChainElement ;
+                               rdfs:range xsd:double ;
+                               rdfs:comment """Well to wheel fuel emission factor (certified) (measured in kg CO2e per 
+kg, l, kWh or MJ)"""@en ;
+                               rdfs:label ":wellToWheelFuelEmissionFactor"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://onerecord.iata.org/ns/cargo#LogisticsObject
+cargo:LogisticsObject rdf:type owl:Class .
+
+
+###  https://onerecord.iata.org/ns/cargo#Piece
+cargo:Piece rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty :pieceClimateEffect ;
+                              owl:allValuesFrom :ClimateEffect
+                            ] .
+
+
+###  https://onerecord.iata.org/ns/cargo#TransportMeans
+cargo:TransportMeans rdf:type owl:Class ;
+                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                       owl:onProperty :emissionClass ;
+                                       owl:allValuesFrom xsd:string
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :emissionClass ;
+                                       owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                     ] .
+
+
+###  https://onerecord.iata.org/ns/cargo#TransportMovement
+cargo:TransportMovement rdf:type owl:Class ;
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty :energyFeedstocks ;
+                                          owl:allValuesFrom :EnergyFeedstock
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :energyMeasured ;
+                                          owl:allValuesFrom cargo:Value
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :transportChainElements ;
+                                          owl:allValuesFrom :TransportChainElement
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :energyMeasured ;
+                                          owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :energyCarrier ;
+                                          owl:allValuesFrom xsd:string
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :energyRemarks ;
+                                          owl:allValuesFrom xsd:string
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :loadFactor ;
+                                          owl:allValuesFrom xsd:double
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :loadFactorRemarks ;
+                                          owl:allValuesFrom xsd:string
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :positioningMovement ;
+                                          owl:allValuesFrom xsd:boolean
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :energyCarrier ;
+                                          owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :energyRemarks ;
+                                          owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :loadFactor ;
+                                          owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :loadFactorRemarks ;
+                                          owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :positioningMovement ;
+                                          owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                        ] .
+
+
+###  https://onerecord.iata.org/ns/cargo#Value
+cargo:Value rdf:type owl:Class .
+
+
+###  https://onerecord.iata.org/ns/glecf#ClimateEffect
+:ClimateEffect rdf:type owl:Class ;
+               rdfs:subClassOf cargo:LogisticsObject ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :dataQualityIndex ;
+                                 owl:allValuesFrom :QualityLevel
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :ofPiece ;
+                                 owl:allValuesFrom cargo:Piece
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :ofTransportChainElement ;
+                                 owl:allValuesFrom :TransportChainElement
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :tankToWheelCO2equivalent ;
+                                 owl:allValuesFrom cargo:Value
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :wellToWheelCO2equivalent ;
+                                 owl:allValuesFrom cargo:Value
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :dataQualityIndex ;
+                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :ofPiece ;
+                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :ofTransportChainElement ;
+                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :tankToWheelCO2equivalent ;
+                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :wellToWheelCO2equivalent ;
+                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :accreditation ;
+                                 owl:allValuesFrom xsd:boolean
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :methodLink ;
+                                 owl:allValuesFrom xsd:string
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :methodName ;
+                                 owl:allValuesFrom xsd:string
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :methodVersion ;
+                                 owl:allValuesFrom xsd:string
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :verification ;
+                                 owl:allValuesFrom xsd:boolean
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :accreditation ;
+                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :methodLink ;
+                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :methodName ;
+                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :methodVersion ;
+                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :verification ;
+                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                               ] ;
+               rdfs:comment "A ClimateEffect holds the calculated emissions of exactly ONE piece on exactly ONE TransportMovement through a TransportChainElement (TCE).  A ClimateEffect must have a connection to one Piece and one TCE. On the other hand, a TCE can have many ClimateEffects for all Pieces covered, and a Piece can have many ClimateEffects."@en ;
+               rdfs:label "ClimateEffect"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#EnergyFeedstock
+:EnergyFeedstock rdf:type owl:Class ;
+                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty :feedstock ;
+                                   owl:allValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :feedstockShare ;
+                                   owl:allValuesFrom xsd:double
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :feedstock ;
+                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :feedstockShare ;
+                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                 ] ;
+                 rdfs:comment "Feedstock and share of it used to create the energy carrier of a TransportMovement. Energy feedstock may be fossil, natural gas, grid, renewable electricity or waste, for example."@en ;
+                 rdfs:label "EnergyFeedstock"@en .
+
+
+###  https://onerecord.iata.org/ns/glecf#QualityLevel
+:QualityLevel rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Class ;
+                                    owl:oneOf ( :LEVEL_1
+                                                :LEVEL_2
+                                                :LEVEL_3
+                                                :LEVEL_4
+                                              )
+                                  ] .
+
+
+###  https://onerecord.iata.org/ns/glecf#TransportChainElement
+:TransportChainElement rdf:type owl:Class ;
+                       rdfs:subClassOf cargo:LogisticsObject ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :elementClimateEffects ;
+                                         owl:allValuesFrom :ClimateEffect
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :tankToWheelCH4 ;
+                                         owl:allValuesFrom cargo:Value
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :tankToWheelCO2 ;
+                                         owl:allValuesFrom cargo:Value
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :tankToWheelNOX ;
+                                         owl:allValuesFrom cargo:Value
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :tankToWheelPM ;
+                                         owl:allValuesFrom cargo:Value
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :tankToWheelSOX ;
+                                         owl:allValuesFrom cargo:Value
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :wellToWheelCO2 ;
+                                         owl:allValuesFrom cargo:Value
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :wellToWheelEmissionIntensity ;
+                                         owl:allValuesFrom cargo:Value
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :tankToWheelCH4 ;
+                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :tankToWheelCO2 ;
+                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :tankToWheelNOX ;
+                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :tankToWheelPM ;
+                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :tankToWheelSOX ;
+                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :wellToWheelCO2 ;
+                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :wellToWheelEmissionIntensity ;
+                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :accreditation ;
+                                         owl:allValuesFrom xsd:boolean
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :verification ;
+                                         owl:allValuesFrom xsd:boolean
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :wellToWheelFuelEmissionFactor ;
+                                         owl:allValuesFrom xsd:double
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :accreditation ;
+                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :verification ;
+                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :wellToWheelFuelEmissionFactor ;
+                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                       ] ;
+                       rdfs:comment "Holds information equivalent to the TCE in the GLEC framework. It includes the shared emission parameters for a particular piece, a group of pieces, a shipment or a customer (not defined at this point in time) on a specific TransportMovement. A TransportMovement (as TOC) can be the base for many TCEs of many customers."@en ;
+                       rdfs:label "TransportChainElement"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://onerecord.iata.org/ns/glecf#LEVEL_1
+:LEVEL_1 rdf:type owl:NamedIndividual ,
+                  :QualityLevel .
+
+
+###  https://onerecord.iata.org/ns/glecf#LEVEL_2
+:LEVEL_2 rdf:type owl:NamedIndividual ,
+                  :QualityLevel .
+
+
+###  https://onerecord.iata.org/ns/glecf#LEVEL_3
+:LEVEL_3 rdf:type owl:NamedIndividual ,
+                  :QualityLevel .
+
+
+###  https://onerecord.iata.org/ns/glecf#LEVEL_4
+:LEVEL_4 rdf:type owl:NamedIndividual ,
+                  :QualityLevel .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
